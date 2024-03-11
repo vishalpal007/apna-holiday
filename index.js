@@ -3,7 +3,11 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 require("dotenv").config({ path: "./.env" })
+const path = require("path")
+
+
 const app = express()
+
 
 // middlewares
 app.use(express.json())
