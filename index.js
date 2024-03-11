@@ -9,8 +9,11 @@ const app = express()
 app.use(express.json())
 app.use(express.static("uploads"))
 app.use(cookieParser())
+
+app.use(express.static(path.join(__dirname, "dist")))
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://apna-holiday.onrender.com/",
     credentials: true
 }))
 // route
@@ -20,7 +23,8 @@ app.use("/api/public", require("./routes/publicRoute"))
 app.use("/api/order", require("./routes/orderRoute"))
 // 404
 app.use("*", (req, res) => {
-    res.status(404).json({ message: "Resource Not Found" })
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+    // res.status(404).json({ message: "Resource Not Found" })
 })
 // error handler
 app.use((err, req, res, next) => {
